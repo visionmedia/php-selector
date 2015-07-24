@@ -70,12 +70,12 @@ function element_to_array($element) {
   $array = array(
     'name' => $element->nodeName,
     'attributes' => array(),
-    'text' => $element->textContent,
+    'text' => utf8_decode($element->textContent),
     'children' =>elements_to_array($element->childNodes)
     );
   if ($element->attributes->length)
     foreach($element->attributes as $key => $attr)
-      $array['attributes'][$key] = $attr->value;
+      $array['attributes'][$key] = utf8_decode($attr->value);
   return $array;
 }
 
