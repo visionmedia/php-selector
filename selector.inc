@@ -26,9 +26,42 @@ class SelectorDOM {
     }
   }
   
+  public function __invoke($selector, $as_array = true) {
+    return $this->select( $selector, $as_array );
+  }
+  
   public function select($selector, $as_array = true) {
-    $elements = $this->xpath->evaluate(selector_to_xpath($selector));
-    return $as_array ? elements_to_array($elements) : $elements;
+    $ret = $this->xpath->evaluate(selector_to_xpath($selector));
+    if ( $as_array !== false ){
+        $ret = elements_to_array($ret);
+        if ( $as_array !== true ){
+            if ( count( $ret ) > 0 ){
+                switch ( $as_array ){
+                    case "first":
+                        $ret = $ret[0];
+                        break;
+                    case "name":
+                        $ret = $ret[0]["name"];
+                        break;
+                    case "attributes":
+                        $ret = $ret[0]["attributes"];
+                        break;
+                    case "text":
+                        $ret = $ret[0]["text"];
+                        break;
+                    case "children":
+                        $ret = $ret[0]["children"];
+                        break;
+                    default:
+                        $ret = null;
+                        break;
+                }
+            } else {
+                return null;
+            }
+        }
+    }
+    return $ret;
   }
 }
 
