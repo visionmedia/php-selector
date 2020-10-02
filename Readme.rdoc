@@ -6,7 +6,7 @@ PHP data miner I had which needed more flexibility.
 
 Current supports most CSS3 selectors.
 
-Tested with php 5.2.8
+Tested with PHP 5.2.8
 
 == Examples
 
@@ -38,7 +38,7 @@ The following will return an array of elements:
   
 == SelectorDOM
 
-Persistant object for element selection.
+A persistent object for element selection.
 
   $dom = new SelectorDOM($html);
   $links = $dom->select('a');
@@ -46,8 +46,7 @@ Persistant object for element selection.
 
 == Contribution
 
-* Like it? use it? feel free to extend and add more CSS3 support, and
-  run test.selector.php
+* Like it? use it? feel free to extend and add more CSS3 support, and run test.selector.php
 
 == More Information
 
