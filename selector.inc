@@ -34,7 +34,7 @@ class SelectorDOM {
     return $as_array ? elements_to_array($elements) : $elements;
   }
 
-  public function remove($selector, $as_array = true) {
+  public function remove($selector) {
     $nodes = $this->xpath->query(selector_to_xpath($selector));
     foreach ($nodes as $node) {
       $node->parentNode->removeChild($node);
