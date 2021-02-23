@@ -1,3 +1,7 @@
+=== 1.1.7 / 2021-02-23
+* Added `remove` method to delete selector from the object
+* Added `html` method to return the object as raw html
+
 === 1.1.5 / 2014-10-20
 * Added nth-child-last support
 * Fixed attribute selectors
