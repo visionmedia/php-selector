@@ -16,19 +16,33 @@ define('SELECTOR_VERSION', '1.1.6');
  */
 
 class SelectorDOM {
+  private $dom = null;
+  private $xpath = null;
+
   public function __construct($data) {
     if ($data instanceof DOMDocument) {
-        $this->xpath = new DOMXpath($data);
+        $this->dom = $data;
     } else {
-        $dom = new DOMDocument();
-        @$dom->loadHTML($data);
-        $this->xpath = new DOMXpath($dom);
+        $this->dom = new DOMDocument();
+        @$this->dom->loadHTML($data);
     }
+    $this->xpath = new DOMXpath($this->dom);
   }
   
   public function select($selector, $as_array = true) {
     $elements = $this->xpath->evaluate(selector_to_xpath($selector));
     return $as_array ? elements_to_array($elements) : $elements;
+  }
+
+  public function remove($selector, $as_array = true) {
+    $nodes = $this->xpath->query(selector_to_xpath($selector));
+    foreach ($nodes as $node) {
+      $node->parentNode->removeChild($node);
+    }
+  }
+
+  public function html() {
+    return $this->dom->saveHTML();
   }
 }
 
